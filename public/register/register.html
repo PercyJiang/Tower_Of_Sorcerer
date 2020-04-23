@@ -1,0 +1,48 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+    <!--  Bootstrap CSS  -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- local -->
+    <link rel="stylesheet" href="register.css">
+</head>
+
+<body>
+    <div class="modal-dialog text-center">
+        <div class="col-sm-8 main-section">
+            <div class="modal-content">
+                <div class="col-12 user-img">
+                    <img src="../img/psyduck1.gif">
+                </div>
+                <form class="col-12">
+                    <div class="form-group">
+                        <label>
+                            <input id="username" type="text" class="form-control" placeholder="Enter Username" required>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input id="password" type="password" class="form-control" placeholder="Enter Password"
+                                required>
+                        </label>
+                    </div>
+                    <button id="cancelBtn" type="submit" class="cancel">Cancel</button>
+                    <button id="okBtn" type="submit" class="ok">OK !</button>
+                </form>
+                <p id="hint" style="color: red;"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="./register.js"></script>
+</body>
+
+</html>
