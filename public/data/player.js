@@ -14,6 +14,6 @@ const setPlayer = () => {
         sword: null,
         shield: null,
         items: [],
-        visitedFloors: [0]
+        visitedFloors: []
     }
 }

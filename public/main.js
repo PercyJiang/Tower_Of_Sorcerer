@@ -1,27 +1,41 @@
-document.getElementById('loginBtn').onclick = function (e) {
-    fetch('/login', {
-        method: 'POST',
-        body: JSON.stringify({
-            username: document.querySelector('#username').value,
-            password: document.querySelector('#password').value
-        }),
-        headers: { 'Content-Type': 'application/json' }
-    }).then(res => res.json()).then(res => {
-        console.log(res)
-        if (res.status) {
-            console.log('login success')
-            location.href = './game/game.html'
-        } else {
-            document.getElementById('hint').innerHTML = 'Invalid Input'
-        }
-    }).catch(err => {
-        console.log(err)
-    })
-    e.preventDefault()
+window.onload = () => { init() }
+
+// global variables
+let ctx = 0
+let blink = 0
+let player = {}
+let terrainDict = {}
+let unitDict = {}
+let maps = {}
+let dialogs = {}
+let displayDict = false
+let sounds = []
+
+const init = () => {
+    ctx = document.getElementById('canvas').getContext('2d')
+
+    setTitle()
+
+    // set up configurations
+    setPlayer()
+    setTerrainDict()
+    setUnitDict()
+    setMaps()
+    setDialogs()
+
+    // refresh the map
+    refresh()
+
+    // background music
+    setUpSoundEffect()
+
+    // register keydown events
+    document.addEventListener('keydown', (e) => { handleKeyEvent(e) }, false)
 }
 
-document.getElementById('registerBtn').onclick = function (e) {
-    location.href = './register/register.html'
-    console.log('hi')
-    e.preventDefault()
+const setTitle = () => {
+    ctx.font = '16px Comic Sans MS'
+    ctx.fillStyle = 'black'
+    ctx.textBaseline = 'middle'
+    ctx.fillText('Tower of Sorcerer', 400 - 130, 10)
 }

@@ -1,5 +1,3 @@
-// const users = require('./mongo')
-
 // express
 const express = require('express')
 const app = express()
@@ -15,57 +13,33 @@ app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }))
 const favicon = require('serve-favicon')
 app.use(favicon(__dirname + '/public/img/favicon_io/favicon.ico'))
 
-// config
-const dotenv = require('dotenv')
-dotenv.config({ path: './config.env' })
-
 // mongo
-const mongodb = require('mongodb')
-const client = new mongodb.MongoClient(
-    'mongodb+srv://percy:percy@percy0-a4fle.mongodb.net/admin?retryWrites=true&w=majority',
-    { useNewUrlParser: true, useUnifiedTopology: true }
-)
-let collection = null
-let users = []
-client.connect().then(() => {
-    return client.db('tower_of_sorcerer').createCollection('users')
-}).then(__collection => {
-    collection = __collection
-    return collection.find({}).toArray()
-}).then(result => {
-    users = result
-    // console.log(users)
+const { get_floor_data } = require('./mongo')
+let collection_floor_data = null, floor_data = []
+get_floor_data().then((result) => {
+    collection_floor_data = result.collection_floor_data
+    floor_data = result.floor_data
 })
 
-// get users
-app.get('/getUsers', (request, response) => {
-    collection.find({}).toArray().then(result => response.json(result))
-})
-
-// login
-app.post('/login', (request, response) => {
-    let match = false
-    for (let i = 0; i < users.length; i++) {
-        if (users[i].username === request.body.username
-            && users[i].password === request.body.password) {
-            match = true
-            response.json({ status: true })
+// save floor count
+app.post('/count_floor', (request, response) => {
+    let floor_found = false
+    for (let i = 0; i < floor_data.length; i++) {
+        if (floor_data[i].floor === request.body.floor) {
+            floor_found = true
+            collection_floor_data.updateOne(
+                { floor: request.body.floor },
+                { $inc: { count: 1 } }
+            )
+            floor_data[i].count += 1
         }
     }
-    if (!match) {
-        response.json({ status: false })
+    if (!floor_found) {
+        collection_floor_data.insertOne({ floor: request.body.floor, count: 1 })
+        floor_data.push({ floor: request.body.floor, count: 1 })
     }
-})
-
-// register
-app.post('/add', (request, response) => {
-    collection.insertOne(request.body).then(result => {
-        users.push(request.body)
-        response.json(result)
-    })
 })
 
 // listen
-const PORT = process.env.PORT || 3000
-const server_log = `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`
-app.listen(PORT, console.log(server_log))
+const PORT = 3000
+app.listen(PORT, console.log(`Server running on port ${PORT}`))

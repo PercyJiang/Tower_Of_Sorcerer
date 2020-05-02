@@ -55,6 +55,11 @@ const setTerrainDict = () => {
                     player.floor++
                     if (!player.visitedFloors.includes(player.floor)) {
                         player.visitedFloors.push(player.floor)
+                        fetch('/count_floor', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ floor: player.floor })
+                        })
                     }
                 }
             },

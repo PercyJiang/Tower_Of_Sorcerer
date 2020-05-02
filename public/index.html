@@ -3,52 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Login</title>
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="http://use.fontawesome.com/releases/v5.0.8/css/solid.css">
-    <!--  Bootstrap CSS  -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <!-- local -->
-    <link rel="stylesheet" href="./style.css">
+    <title>Tower of Sorcerer</title>
+    <!-- Local -->
+    <link rel="stylesheet" href="./style.css" />
+    <!-- sweet alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <!-- main script -->
+    <script src="./main.js"></script>
+    <!-- utility scripts -->
+    <script src="./utils/drawings.js"></script>
+    <script src="./utils/data.js"></script>
+    <script src="./utils/events.js"></script>
+    <script src="./utils/music.js"></script>
+    <!-- data scripts -->
+    <script src="./data/player.js"></script>
+    <script src="./data/terrainDict.js"></script>
+    <script src="./data/unitDict.js"></script>
+    <script src="./data/maps.js"></script>
+    <script src="./data/dialogs.js"></script>
+    <!-- drawing scripts -->
+    <script src="./drawings/draw.js"></script>
+    <script src="./drawings//statusBar.js"></script>
+    <script src="./drawings/map.js"></script>
+    <script src=".//drawings/dictionary.js"></script>
+    <!-- event scripts -->
+    <script src="./events/events.js"></script>
+    <script src="./events/directionKeys.js"></script>
+    <script src="./events/otherKeys.js"></script>
+    <script src="./events/automatic.js"></script>
 </head>
 
 <body>
-    <div class="modal-dialog text-center">
-        <div class="col-sm-8 main-section">
-            <div class="modal-content">
-                <div class="col-12 user-img">
-                    <img src="./img/psyduck1.gif">
-                </div>
-                <form class="col-12">
-                    <div class="form-group">
-                        <label>
-                            <input id="username" type="text" class="form-control" placeholder="Enter Username" required>
-                        </label>
-                    </div>
-                    <div class="form-group">
-                        <label>
-                            <input id="password" type="password" class="form-control" placeholder="Enter Password"
-                                required>
-                        </label>
-                    </div>
-                    <button id="loginBtn" type="submit" class="btn">
-                        <i class="fa fa-rocket"></i>
-                        Login
-                    </button>
-                    <button id="registerBtn" type="submit" class="btn">
-                        <i class="fa fa-file-text"></i>
-                        Register
-                    </button>
-                </form>
-                <p id="hint" style="color: red;"></p>
-            </div>
-        </div>
-    </div>
-
-    <script src="./main.js"></script>
+    <a href="http://www.4399.com/special/68.htm#search3">Original Flash Game Series</a>
+    <canvas id="canvas" height="400px" width="670px"></canvas>
 </body>
 
 </html>
