@@ -13,9 +13,25 @@ const setUpSoundEffect = () => {
             this.sound.pause();
         }
     }
-    sounds.push(new sound("./musics/item.mp3")) // 0
-    sounds.push(new sound("./musics/fight.mp3")) // 1
-    sounds.push(new sound("./musics/stair.mp3")) // 2
-    sounds.push(new sound("./musics/door.mp3")) // 3
-    sounds.push(new sound("./musics/confirm.mp3")) // 4
+    sounds['item'] = new sound("./musics/item.mp3")
+    sounds['fight'] = new sound("./musics/fight.mp3")
+    sounds['stair'] = new sound("./musics/stair.mp3")
+    sounds['door'] = new sound("./musics/door.mp3")
+    sounds['confirm'] = new sound("./musics/confirm.mp3")
+}
+
+const playBGM = () => {
+    const audioElement = document.createElement('audio')
+    document.body.appendChild(audioElement)
+    audioElement.setAttribute('id', 'bgm')
+    audioElement.src = '../musics/ElvenForest.mp3'
+    audioElement.loop = true
+    audioElement.volume = 0.2
+    audioElement.currentTime = 2
+    audioElement.play()
+}
+
+const stopBGM = () => {
+    let audio = document.getElementById('bgm')
+    audio.remove()
 }

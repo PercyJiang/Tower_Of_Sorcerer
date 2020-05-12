@@ -4,6 +4,10 @@ const client = new mongodb.MongoClient(
     { useNewUrlParser: true, useUnifiedTopology: true }
 )
 
+/**
+ * Accesses the 'floor_data' collection in the database.
+ * @return { object } The mongodb collection object and the corresponding list.
+ */
 async function get_floor_data() {
     let collection_floor_data = null, floor_data = []
     await client.connect().then(() => {

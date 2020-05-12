@@ -8,5 +8,6 @@ const drawMap = () => {
             unitDict[idUnit].draw(i, j)
         }
     }
+    // draw the player
     drawImage(1, blink, player.face - 1, player.y, player.x)
 }

@@ -1,3 +1,6 @@
+/**
+ * Get the enemy list on player's current floor
+ */
 const getEnemyList = () => {
     let map = maps[player.floor]
     let enemyList = []
@@ -13,4 +16,35 @@ const getEnemyList = () => {
         }
     }
     return enemyList
+}
+
+/**
+ * Fire a sweet alert using a Fairy image
+ * @param {str} dialog Content of dialog
+ */
+const fairyTalk = (dialog) => {
+    Swal.fire({
+        title: 'Fairy:',
+        text: dialog,
+        imageUrl: './images/fairy.png',
+        imageWidth: 100,
+        imageHeight: 100
+    })
+}
+
+/**
+ * Calculate the damage that the player will take from fighting an enemy
+ * @param {int} hp The enemy's health
+ * @param {int} atk The enemy's attack
+ * @param {int} def The enemy's defense
+ */
+const calcDmg = (hp, atk, def) => {
+    // returns infinity if player's atk is lower than enemy's def
+    if (player.atk <= def) { return 1 / 0 }
+    let turns = 0
+    let dmgDealtPerTurn = player.atk - def
+    let dmgTakenPerTurn = atk - player.def
+    turns = Math.ceil(hp / dmgDealtPerTurn)
+    let result = (turns - 1) * dmgTakenPerTurn
+    return result < 0 ? 0 : result
 }

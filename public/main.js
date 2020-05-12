@@ -9,12 +9,16 @@ let unitDict = {}
 let maps = {}
 let dialogs = {}
 let displayDict = false
-let sounds = []
+let sounds = {}
 
 const init = () => {
     ctx = document.getElementById('canvas').getContext('2d')
 
-    setTitle()
+    // set title
+    ctx.font = '16px Comic Sans MS'
+    ctx.fillStyle = 'black'
+    ctx.textBaseline = 'middle'
+    ctx.fillText('Tower of Sorcerer', 280, 10)
 
     // set up configurations
     setPlayer()
@@ -26,16 +30,9 @@ const init = () => {
     // refresh the map
     refresh()
 
-    // background music
+    // set up sound effect
     setUpSoundEffect()
 
     // register keydown events
     document.addEventListener('keydown', (e) => { handleKeyEvent(e) }, false)
-}
-
-const setTitle = () => {
-    ctx.font = '16px Comic Sans MS'
-    ctx.fillStyle = 'black'
-    ctx.textBaseline = 'middle'
-    ctx.fillText('Tower of Sorcerer', 400 - 130, 10)
 }

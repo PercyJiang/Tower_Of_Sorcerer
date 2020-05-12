@@ -1,3 +1,11 @@
+/**
+ * Set up the terrain dictionary
+ * name: The name of terrain
+ * canPass: Returns whether player can pass the terrain
+ * effect: Returns the special effect of the terrain
+ * clear: Whether the terrain should be cleared after player passed it
+ * draw: Draw the image of terrain on specified location
+ */
 const setTerrainDict = () => {
     terrainDict = {
         0: {
@@ -22,7 +30,8 @@ const setTerrainDict = () => {
             name: 'stair down',
             canPass: () => { return true },
             effect: () => {
-                sounds[2].play()
+                sounds['stair'].play()
+                if (player.floor === 1) { stopBGM() }
                 player.floor--
                 if (!player.visitedFloors.includes(player.floor)) {
                     player.visitedFloors.push(player.floor)
@@ -38,7 +47,8 @@ const setTerrainDict = () => {
             name: 'stair up',
             canPass: () => { return true },
             effect: () => {
-                sounds[2].play()
+                sounds['stair'].play()
+                if (player.floor === 0) { playBGM() }
                 if (player.floor === 10) {
                     Swal.fire({
                         title: 'Percy:',
@@ -73,7 +83,7 @@ const setTerrainDict = () => {
             name: 'yellow door',
             canPass: () => { return player.keyYellow > 0 },
             effect: () => {
-                sounds[3].play()
+                sounds['door'].play()
                 player.keyYellow--
             },
             clear: true,
@@ -85,7 +95,7 @@ const setTerrainDict = () => {
             name: 'blue door',
             canPass: () => { return player.keyBlue > 0 },
             effect: () => {
-                sounds[3].play()
+                sounds['door'].play()
                 player.keyBlue--
             },
             clear: true,
@@ -97,7 +107,7 @@ const setTerrainDict = () => {
             name: 'red door',
             canPass: () => { return player.keyRed > 0 },
             effect: () => {
-                sounds[3].play()
+                sounds['door'].play()
                 player.keyRed--
             },
             clear: true,
@@ -127,7 +137,7 @@ const setTerrainDict = () => {
         9: {
             name: 'automatic door',
             canPass: () => { return false },
-            effect: () => { sounds[3].play() },
+            effect: () => { sounds['door'].play() },
             clear: true,
             draw: (i, j) => {
                 drawImage(5, 3, 0, i, j)

@@ -1,15 +1,10 @@
-const calcDmg = (hp, atk, def) => {
-    if (player.atk <= def) {
-        return 1 / 0
-    }
-    let turns = 0
-    let dmgDealtPerTurn = player.atk - def
-    let dmgTakenPerTurn = atk - player.def
-    turns = Math.ceil(hp / dmgDealtPerTurn)
-    let result = (turns - 1) * dmgTakenPerTurn
-    return result < 0 ? 0 : result
-}
-
+/**
+ * Set up the unit dictionary
+ * type: A unit can either be an item, an enemy, or an npc
+ * name: The name of unit
+ * effect: Returns the special effect of the unit
+ * draw: Draw the image of unit on specified location
+ */
 const setUnitDict = () => {
     unitDict = {
         0: {
@@ -24,7 +19,7 @@ const setUnitDict = () => {
             name: 'red gem',
             effect: () => {
                 player.atk += 2
-                sounds[0].play()
+                sounds['item'].play()
             },
             draw: (i, j) => { drawImage(2, 0, 0, i, j) },
             canPass: () => { return true }
@@ -34,7 +29,7 @@ const setUnitDict = () => {
             name: 'blue gem',
             effect: () => {
                 player.def += 2
-                sounds[0].play()
+                sounds['item'].play()
             },
             draw: (i, j) => { drawImage(2, 1, 0, i, j) },
             canPass: () => { return true }
@@ -44,7 +39,7 @@ const setUnitDict = () => {
             name: 'red potion',
             effect: () => {
                 player.hp += 50
-                sounds[0].play()
+                sounds['item'].play()
             },
             draw: (i, j) => { drawImage(2, 0, 1, i, j) },
             canPass: () => { return true }
@@ -54,7 +49,7 @@ const setUnitDict = () => {
             name: 'blue potion',
             effect: () => {
                 player.hp += 200
-                sounds[0].play()
+                sounds['item'].play()
             },
             draw: (i, j) => { drawImage(2, 1, 1, i, j) },
             canPass: () => { return true }
@@ -63,7 +58,7 @@ const setUnitDict = () => {
             type: 'item',
             name: 'yellow key',
             effect: () => {
-                sounds[0].play()
+                sounds['item'].play()
                 player.keyYellow++
             },
             draw: (i, j) => { drawImage(2, 0, 4, i, j) },
@@ -73,7 +68,7 @@ const setUnitDict = () => {
             type: 'item',
             name: 'blue key',
             effect: () => {
-                sounds[0].play()
+                sounds['item'].play()
                 player.keyBlue++
             },
             draw: (i, j) => { drawImage(2, 1, 4, i, j) },
@@ -83,7 +78,7 @@ const setUnitDict = () => {
             type: 'item',
             name: 'red key',
             effect: () => {
-                sounds[0].play()
+                sounds['item'].play()
                 player.keyRed++
             },
             draw: (i, j) => { drawImage(2, 2, 4, i, j) },
@@ -93,7 +88,7 @@ const setUnitDict = () => {
             type: 'item',
             name: 'dictionary',
             effect: () => {
-                sounds[0].play()
+                sounds['item'].play()
                 player.items.push('dictionary')
             },
             draw: (i, j) => { drawImage(2, 0, 7, i, j) },
@@ -103,7 +98,7 @@ const setUnitDict = () => {
             type: 'item',
             name: 'notebook',
             effect: () => {
-                sounds[0].play()
+                sounds['item'].play()
                 player.items.push('notebook')
             },
             draw: (i, j) => { drawImage(2, 1, 7, i, j) },
@@ -113,7 +108,7 @@ const setUnitDict = () => {
             type: 'item',
             name: 'flying machine',
             effect: () => {
-                sounds[0].play()
+                sounds['item'].play()
                 player.items.push('flying machine')
             },
             draw: (i, j) => { drawImage(2, 2, 7, i, j) },
@@ -128,7 +123,7 @@ const setUnitDict = () => {
                     title: 'Beginner Sword',
                     text: `Your ATK has been increased by 10`
                 })
-                sounds[4].play()
+                sounds['confirm'].play()
                 player.sword = [0, 12]
                 player.atk += 10
             },
@@ -172,7 +167,7 @@ const setUnitDict = () => {
                     title: 'Beginner Shield',
                     text: `Your DEF has been increased by 10`
                 })
-                sounds[4].play()
+                sounds['confirm'].play()
                 player.shield = [0, 14]
                 player.def += 10
             },
@@ -227,7 +222,7 @@ const setUnitDict = () => {
             effect: function () {
                 player.hp -= this.dmg()
                 player.coins += this.coins
-                sounds[1].play()
+                sounds['fight'].play()
             },
             lore: `A pile of bones`
         },
@@ -244,7 +239,7 @@ const setUnitDict = () => {
             effect: function () {
                 player.hp -= this.dmg()
                 player.coins += this.coins
-                sounds[1].play()
+                sounds['fight'].play()
             },
             lore: `A well-trained Skeleton`
         },
@@ -261,7 +256,7 @@ const setUnitDict = () => {
             effect: function () {
                 player.hp -= this.dmg()
                 player.coins += this.coins
-                sounds[1].play()
+                sounds['fight'].play()
             },
             lore: `Leader of Skeleton Soldiers`
         },
@@ -278,7 +273,7 @@ const setUnitDict = () => {
             effect: function () {
                 player.hp -= this.dmg()
                 player.coins += this.coins
-                sounds[1].play()
+                sounds['fight'].play()
             }
         },
         104: {
@@ -298,7 +293,7 @@ const setUnitDict = () => {
             effect: function () {
                 player.hp -= this.dmg()
                 player.coins += this.coins
-                sounds[1].play()
+                sounds['fight'].play()
             },
             lore: `Fast flying creatures`,
             special: `Always attack first`
@@ -320,7 +315,7 @@ const setUnitDict = () => {
             effect: function () {
                 player.hp -= this.dmg()
                 player.coins += this.coins
-                sounds[1].play()
+                sounds['fight'].play()
             },
             lore: `Adult bat`,
             special: `Always attack first`
@@ -372,7 +367,7 @@ const setUnitDict = () => {
             effect: function () {
                 player.hp -= this.dmg()
                 player.coins += this.coins
-                sounds[1].play()
+                sounds['fight'].play()
             },
             lore: `A large masses of green fluid`
         },
@@ -389,7 +384,7 @@ const setUnitDict = () => {
             effect: function () {
                 player.hp -= this.dmg()
                 player.coins += this.coins
-                sounds[1].play()
+                sounds['fight'].play()
             },
             lore: `A large masses of red fluid`
         },
@@ -406,7 +401,7 @@ const setUnitDict = () => {
             effect: function () {
                 player.hp -= this.dmg()
                 player.coins += this.coins
-                sounds[1].play()
+                sounds['fight'].play()
             },
             lore: `A large masses of black fluid`
         },
@@ -423,7 +418,7 @@ const setUnitDict = () => {
             effect: function () {
                 player.hp -= this.dmg()
                 player.coins += this.coins
-                sounds[1].play()
+                sounds['fight'].play()
             },
             lore: `The king of the Slimes`
         },
@@ -443,7 +438,7 @@ const setUnitDict = () => {
             effect: function () {
                 player.hp -= this.dmg()
                 player.coins += this.coins
-                sounds[1].play()
+                sounds['fight'].play()
             },
             lore: `A spell caster who attacks with magic`,
             special: `Armor penetration`
@@ -464,7 +459,7 @@ const setUnitDict = () => {
             effect: function () {
                 player.hp -= this.dmg()
                 player.coins += this.coins
-                sounds[1].play()
+                sounds['fight'].play()
             },
             lore: `A well-trained Sorcerer`,
             special: `Armor penetration`
@@ -542,7 +537,7 @@ const setUnitDict = () => {
             effect: function () {
                 player.hp -= this.dmg()
                 player.coins += this.coins
-                sounds[1].play()
+                sounds['fight'].play()
             },
             lore: `Live creature created by God, using stones`
         },
@@ -604,7 +599,7 @@ const setUnitDict = () => {
             effect: function () {
                 player.hp -= this.dmg()
                 player.coins += this.coins
-                sounds[1].play()
+                sounds['fight'].play()
             },
             lore: `A skilled sword wielder who is fast and fit`,
             special: `Attacks twice per tern`
@@ -667,7 +662,7 @@ const setUnitDict = () => {
             effect: function () {
                 player.hp -= this.dmg()
                 player.coins += this.coins
-                sounds[1].play()
+                sounds['fight'].play()
             },
             lore: `A golden slime infected by unknown force`
         },
@@ -684,7 +679,7 @@ const setUnitDict = () => {
             effect: function () {
                 player.hp -= this.dmg()
                 player.coins += this.coins
-                sounds[1].play()
+                sounds['fight'].play()
             },
             lore: `A large masses of golden fluid`
         },
@@ -701,7 +696,7 @@ const setUnitDict = () => {
             effect: function () {
                 player.hp -= this.dmg()
                 player.coins += this.coins
-                sounds[1].play()
+                sounds['fight'].play()
             },
             lore: `Live creature created by God, using steel`
         },
@@ -718,7 +713,7 @@ const setUnitDict = () => {
             effect: function () {
                 player.hp -= this.dmg()
                 player.coins += this.coins
-                sounds[1].play()
+                sounds['fight'].play()
             },
             lore: `A large masses of silver fluid`
         },
@@ -769,7 +764,7 @@ const setUnitDict = () => {
                     confirmButtonText: 'Yes!'
                 }).then((result) => {
                     if (result.value && player.coins >= 40) {
-                        sounds[4].play()
+                        sounds['confirm'].play()
                         player.hp += 400
                         player.coins -= 40
                         Swal.fire(
@@ -809,7 +804,7 @@ const setUnitDict = () => {
                     confirmButtonText: 'Yes!'
                 }).then((result) => {
                     if (result.value && player.coins >= 40) {
-                        sounds[4].play()
+                        sounds['confirm'].play()
                         player.atk += 4
                         player.coins -= 40
                         Swal.fire(
@@ -838,7 +833,7 @@ const setUnitDict = () => {
                     confirmButtonText: 'Yes!'
                 }).then((result) => {
                     if (result.value && player.coins >= 40) {
-                        sounds[4].play()
+                        sounds['confirm'].play()
                         player.def += 4
                         player.coins -= 40
                         Swal.fire(

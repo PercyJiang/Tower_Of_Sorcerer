@@ -8,8 +8,10 @@ Inspired by an old flash game series “Tower of Sorcerer”
 
 JavaScript  
 Canvas  
+MongoDB  
+Express  
 
 ## Usage
 
 Play the game at: <https://percyjiang-tower-of-sorcerer.glitch.me/>  
-The original flash game series: <http://www.4399.com/special/68.htm#search3> 
+The original flash game series: <http://www.4399.com/special/68.htm#search3>

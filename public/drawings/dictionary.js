@@ -1,3 +1,6 @@
+/**
+ * Draw the dictionary based on player's current floor
+ */
 const drawDictionary = () => {
     let enemyList = []
     switch (dictionaryPage) {

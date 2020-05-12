@@ -1,3 +1,7 @@
+/**
+ * Set up automatic events
+ * Automatic doors and story events
+ */
 const checkAuto = () => {
     let floor = player.floor
     switch (floor) {

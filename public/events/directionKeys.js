@@ -1,3 +1,9 @@
+// initialize default variables
+let direction = null, terrain = null, unit = null
+let borderCheck = false
+let move = () => { return }
+let face = null
+
 const handleDirectionKeysEvent = (keyCode) => {
     switch (keyCode) {
         case 37: // left
@@ -39,9 +45,8 @@ const handleDirectionKeysEvent = (keyCode) => {
         if (borderCheck && terrain.canPass()) {
             // check terrain
             terrain.effect()
-            if (terrain.clear) {
-                maps[player.floor].terrainMap[direction] = 0
-            }
+            if (terrain.clear) { maps[player.floor].terrainMap[direction] = 0 }
+
             // check unit
             if (unit.type === 'npc') {
                 unit.effect()
@@ -58,6 +63,8 @@ const handleDirectionKeysEvent = (keyCode) => {
                     imageHeight: 100
                 })
             }
+
+            // reset
             direction = null
             move = () => { }
         }

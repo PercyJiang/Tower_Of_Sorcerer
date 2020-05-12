@@ -11,9 +11,9 @@ app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }))
 
 // favicon
 const favicon = require('serve-favicon')
-app.use(favicon(__dirname + '/public/img/favicon_io/favicon.ico'))
+app.use(favicon(__dirname + '/public/images/favicon_io/favicon.ico'))
 
-// mongo
+// mongodb
 const { get_floor_data } = require('./mongo')
 let collection_floor_data = null, floor_data = []
 get_floor_data().then((result) => {
@@ -26,12 +26,13 @@ app.post('/count_floor', (request, response) => {
     let floor_found = false
     for (let i = 0; i < floor_data.length; i++) {
         if (floor_data[i].floor === request.body.floor) {
-            floor_found = true
             collection_floor_data.updateOne(
                 { floor: request.body.floor },
                 { $inc: { count: 1 } }
             )
             floor_data[i].count += 1
+            floor_found = true
+            break
         }
     }
     if (!floor_found) {
